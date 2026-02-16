@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+
+// Filter blog entries with 'draft: false' & date before current date
+const publishedBlogEntries = await getCollection("publications", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+// Sort content entries by publication date
+publishedBlogEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+const highlightScript = `
+<style>
+  @keyframes highlight-fade {
+    0% {
+      background-color: rgb(253, 224, 71);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+  
+  .highlight-pulse {
+    animation: highlight-fade 2s ease-out;
+  }
+</style>
+
+<script>
+  function handleHighlight() {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        setTimeout(() => {
+          element.classList.add('highlight-pulse');
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    }
+  }
+  
+  handleHighlight();
+  window.addEventListener('hashchange', handleHighlight);
+<\/script>
+`;
+---
+
+<Layout title="Publications">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Publications</Fragment>
+      <Fragment slot="desc">
+        Publications from the ARI Lab (George Mason University). Includes collaborative work with partner labs and intitutions.
+      </Fragment>
+    </Sectionhead>
+    <main class="mt-16">
+      <ul class="grid gap-8 max-w-4xl mx-auto">
+        {
+          publishedBlogEntries.map((entry, index) => (
+            <li id={entry.slug} class="border-l-4 border-blue-400 pl-6 transition-colors">
+              <h3 class="text-xl font-semibold mb-2">
+                {entry.data.title}
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                {entry.data.citation}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+    <Fragment set:html={highlightScript} />
+  </Container>
+</Layout>

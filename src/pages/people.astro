@@ -1,0 +1,229 @@
+---
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+
+// Filter blog entries with 'draft: false' & date before current date
+const publishedBlogEntries = await getCollection("people", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+// Sort content entries by publication date
+publishedBlogEntries.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+// Separate director and students
+const director = publishedBlogEntries.filter(entry => entry.data.category === "Director");
+const students = publishedBlogEntries.filter(entry => entry.data.category !== "Director");
+---
+
+<Layout title="People">
+  <Container>
+    <main class="mt-16">
+      <div id="lab-image-container" class="fixed top-20 left-1/2 transform -translate-x-1/2 pointer-events-none z-0 flex items-center justify-center max-w-3xl w-full px-5">
+        <img id="lab-image" src="/images/lab.JPG" alt="ARI Lab" class="w-full rounded-lg object-cover" style="opacity: 1;" />
+      </div>
+      <div class="relative z-10">
+        <div id="spacer" class="flex items-center justify-center">
+          {/* Spacer to keep content below the image initially */}
+        </div>
+        <div class="mb-20 max-w-4xl mx-auto bg-white relative" id="people-content">
+          <Sectionhead>
+            <Fragment slot="title">People</Fragment>
+            <Fragment slot="desc">
+              
+            </Fragment>
+          </Sectionhead>
+          {/* Director Section */}
+          {director.length > 0 && (
+            <div class="mb-20">
+              <ul class="grid gap-16">
+                {
+                  director.map((entry, index) => (
+                    <li>
+                      <div class="flex flex-col items-center text-center">
+                        <a href="https://dporfirio.github.io" target="_blank" rel="noopener noreferrer">
+                          <Picture
+                            src={entry.data.image.src}
+                            alt={entry.data.image.alt}
+                            sizes="200px"
+                            width={200}
+                            height={200}
+                            loading="eager"
+                            decoding="sync"
+                            class="w-[200px] h-[200px] rounded-md object-cover object-center bg-white mb-4"
+                          />
+                        </a>
+                        <div>
+                          <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
+                            {entry.data.category}
+                          </span>
+
+                          <h2 class="text-3xl font-semibold leading-snug tracking-tight mt-1 ">
+                            {entry.data.title}
+                          </h2>
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          )}
+
+          {/* Students Section */}
+          {students.length > 0 && (
+            <div>
+              <h3 class="text-2xl font-semibold mb-8">Students</h3>
+          <ul class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {
+              students.map((entry, index) => (
+                <li>
+                  <div class="flex flex-col items-center text-center">
+                    {entry.data.link ? (
+                      <a href={entry.data.link} target="_blank" rel="noopener noreferrer">
+                        <Picture
+                          src={entry.data.image.src}
+                          alt={entry.data.image.alt}
+                          sizes="200px"
+                          width={200}
+                          height={200}
+                          loading={index <= 2 ? "eager" : "lazy"}
+                          decoding={index <= 2 ? "sync" : "async"}
+                          class="w-[200px] h-[200px] rounded-md object-cover object-center bg-white mb-4"
+                        />
+                      </a>
+                    ) : (
+                      <Picture
+                        src={entry.data.image.src}
+                        alt={entry.data.image.alt}
+                        sizes="200px"
+                        width={200}
+                        height={200}
+                        loading={index <= 2 ? "eager" : "lazy"}
+                        decoding={index <= 2 ? "sync" : "async"}
+                        class="w-[200px] h-[200px] rounded-md object-cover object-center bg-white mb-4"
+                      />
+                    )}
+                    <div>
+                      <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
+                        {entry.data.category}
+                      </span>
+
+                      {entry.data.link ? (
+                        <a href={entry.data.link} target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+                          <h2 class="text-xl font-semibold leading-snug tracking-tight mt-1">
+                            {entry.data.title}
+                          </h2>
+                        </a>
+                      ) : (
+                        <h2 class="text-xl font-semibold leading-snug tracking-tight mt-1">
+                          {entry.data.title}
+                        </h2>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      )}
+          <div class="h-[400px]"></div>
+        </div>
+      </div>
+    </main>
+  </Container>
+</Layout>
+
+<script>
+  function handlePeoplePage() {
+    const labImage = document.getElementById('lab-image');
+    const container = document.getElementById('lab-image-container');
+    const navbar = document.getElementById('navbar');
+    const peopleContent = document.getElementById('people-content');
+    const spacer = document.getElementById('spacer');
+    
+    if (!labImage || !container) return;
+    
+    // Set spacer height to match lab image height
+    function setSpacerHeight() {
+      if (labImage.complete) {
+        // Image is already loaded
+        const imageHeight = labImage.naturalHeight;
+        const imageWidth = labImage.naturalWidth;
+        const displayWidth = labImage.offsetWidth;
+        
+        // Calculate the displayed height based on aspect ratio
+        const aspectRatio = imageHeight / imageWidth;
+        const displayHeight = displayWidth * aspectRatio;
+        
+        if (spacer) {
+          spacer.style.height = displayHeight + 'px';
+        }
+      } else {
+        // Wait for image to load
+        labImage.onload = () => {
+          const imageHeight = labImage.naturalHeight;
+          const imageWidth = labImage.naturalWidth;
+          const displayWidth = labImage.offsetWidth;
+          const aspectRatio = imageHeight / imageWidth;
+          const displayHeight = displayWidth * aspectRatio;
+          
+          if (spacer) {
+            spacer.style.height = displayHeight + 'px';
+          }
+        };
+      }
+    }
+    
+    setSpacerHeight();
+    window.addEventListener('load', setSpacerHeight);
+    window.addEventListener('resize', setSpacerHeight);
+    
+    function updatePageState() {
+      const scrollTop = window.scrollY;
+      
+      // Fade the lab image
+      const containerTop = container.offsetTop;
+      const fadeStart = containerTop;
+      const fadeEnd = containerTop + window.innerHeight;
+      
+      if (scrollTop < fadeStart) {
+        labImage.style.opacity = '1';
+      } else if (scrollTop > fadeEnd) {
+        labImage.style.opacity = '0';
+      } else {
+        const progress = (scrollTop - fadeStart) / (fadeEnd - fadeStart);
+        labImage.style.opacity = Math.max(0, 1 - progress);
+      }
+      
+      // Handle navbar sticky behavior
+      if (navbar && peopleContent) {
+        // Find the "People" title element within the content
+        const peopleTitle = peopleContent.querySelector('h1, h2, h3');
+        
+        if (peopleTitle) {
+          // Get the viewport position of the people title
+          const titleRect = peopleTitle.getBoundingClientRect();
+          
+          // Keep navbar sticky until the "People" title reaches the top of the viewport
+          if (titleRect.top <= 0) {
+            navbar.style.position = 'static';
+          } else {
+            navbar.style.position = 'sticky';
+            navbar.style.top = '0';
+          }
+        }
+      }
+    }
+    
+    window.addEventListener('scroll', updatePageState, { passive: true });
+    updatePageState();
+  }
+  
+  handlePeoplePage();
+</script>
