@@ -6,15 +6,12 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astroship.web3templates.com",
+  site: "https://ari-lab-gmu.github.io",
+  base: "/",
+  output: "static",
   integrations: [mdx(), sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],
   },
 });
-
-
-export default defineConfig({
-  site: 'https://ari-lab-gmu.github.io',
-  repo: '/ari-lab-gmu/'
 });
