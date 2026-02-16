@@ -1,0 +1,33 @@
+{
+  "$ref": "#/definitions/publications",
+  "definitions": {
+    "publications": {
+      "type": "object",
+      "properties": {
+        "draft": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "citation": {
+          "type": "string"
+        },
+        "publishDate": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "draft",
+        "title",
+        "citation",
+        "publishDate"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
