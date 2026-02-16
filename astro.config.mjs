@@ -16,4 +16,5 @@ export default defineConfig({
 
 export default defineConfig({
   site: 'https://ari-lab-gmu.github.io',
+  repo: '/ari-lab-gmu/'
 });
