@@ -2,6 +2,20 @@
 import { Picture } from "astro:assets";
 import Link from "@/components/ui/link.astro";
 import { Icon } from "astro-icon/components";
+
+// Map categories to different colors
+const categoryColors: Record<string, string> = {
+  'papers': 'text-blue-400',
+  'grants': 'text-green-400',
+  'code': 'text-purple-400',
+  'talks': 'text-pink-400',
+  'events': 'text-orange-400',
+  'outreach': 'text-cyan-400',
+};
+
+const getCategoryColor = (category: string) => {
+  return categoryColors[category.toLowerCase()] || 'text-blue-400';
+};
 ---
 
 <main
@@ -33,9 +47,9 @@ import { Icon } from "astro-icon/components";
 <section class="py-16">
   <div class="max-w-(--breakpoint-xl) mx-auto">
     <h2 class="text-3xl lg:text-4xl font-bold mb-8">News</h2>
-    <div class="space-y-0">
-        <p class="text-gray-600"><b>> 1.26</b> Congrats to <a href="https://humanfactors.gmu.edu/">HFAC</a> students JP Tiger, Neha Kannan, Jacob Henley, and Paige Williamson on a successful <a href="/publications#nose-knows-2026">HRI Student Design</a> submission!</p>
-        <p class="text-gray-600"><b>> 8.25</b> ARI Lab founded.</p>
+    <div class="space-y-3">
+        <p class="text-gray-600"><b>> 1.26</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> Congrats to <a href="https://humanfactors.gmu.edu/">HFAC</a> students JP Tiger, Neha Kannan, Jacob Henley, and Paige Williamson on a successful <a href="/publications#nose-knows-2026">HRI Student Design</a> submission!</p>
+        <p class="text-gray-600"><b>> 8.25</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('events')}`}>[events]</span> ARI Lab founded.</p>
     </div>
   </div>
 </section>

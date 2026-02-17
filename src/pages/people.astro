@@ -30,7 +30,7 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
         <div id="spacer" class="flex items-center justify-center">
           {/* Spacer to keep content below the image initially */}
         </div>
-        <div class="mb-20 max-w-4xl mx-auto bg-white relative" id="people-content">
+        <div class="mb-20 max-w-4xl mx-auto bg-white relative z-0" id="people-content">
           <Sectionhead>
             <Fragment slot="title">People</Fragment>
             <Fragment slot="desc">
@@ -202,23 +202,7 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
       }
       
       // Handle navbar sticky behavior
-      if (navbar && peopleContent) {
-        // Find the "People" title element within the content
-        const peopleTitle = peopleContent.querySelector('h1, h2, h3');
-        
-        if (peopleTitle) {
-          // Get the viewport position of the people title
-          const titleRect = peopleTitle.getBoundingClientRect();
-          
-          // Keep navbar sticky until the "People" title reaches the top of the viewport
-          if (titleRect.top <= 0) {
-            navbar.style.position = 'static';
-          } else {
-            navbar.style.position = 'sticky';
-            navbar.style.top = '0';
-          }
-        }
-      }
+      // Removed - navbar should always stay visible
     }
     
     window.addEventListener('scroll', updatePageState, { passive: true });
