@@ -24,7 +24,7 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
   <Container>
     <main class="mt-16">
       <div id="lab-image-container" class="fixed top-20 left-1/2 transform -translate-x-1/2 pointer-events-none z-0 flex items-center justify-center max-w-3xl w-full px-5">
-        <img id="lab-image" src="/images/lab.JPG" alt="ARI Lab" class="w-full rounded-lg object-cover" style="opacity: 1;" />
+        <img id="lab-image" src="/images/lab.JPG" alt="ARI Lab" class="w-full rounded-lg object-cover" style="opacity: 1; transform: scale(0.9);" />
       </div>
       <div class="relative z-10">
         <div id="spacer" class="flex items-center justify-center">
@@ -159,7 +159,7 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
         
         // Calculate the displayed height based on aspect ratio
         const aspectRatio = imageHeight / imageWidth;
-        const displayHeight = displayWidth * aspectRatio;
+        const displayHeight = displayWidth * aspectRatio - 50;
         
         if (spacer) {
           spacer.style.height = displayHeight + 'px';
@@ -171,7 +171,7 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
           const imageWidth = labImage.naturalWidth;
           const displayWidth = labImage.offsetWidth;
           const aspectRatio = imageHeight / imageWidth;
-          const displayHeight = displayWidth * aspectRatio;
+          const displayHeight = displayWidth * aspectRatio - 50;
           
           if (spacer) {
             spacer.style.height = displayHeight + 'px';
