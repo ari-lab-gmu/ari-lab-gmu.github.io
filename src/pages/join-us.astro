@@ -1,0 +1,25 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+---
+
+<Layout title="Join the ARI Lab">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Join Us</Fragment>
+      <Fragment slot="desc"></Fragment>
+    </Sectionhead>
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
+      <p class="text-lg leading-relaxed text-slate-600">
+        The ARI Lab is always looking for talented, motivated students who are interested in human-robot interaction. Prospective students must be interested in both <b>robotics</b> and <b>human-centered</b> research, both of which are very challenging areas by themselves.
+      </p>
+      <p class="text-lg leading-relaxed text-slate-600">
+        <b>Ph.D. Students</b> &mdash; The best way to join the ARI Lab as a Ph.D. student is to apply for admission to the Computer Science Department at George Mason University. If you are interested in working with me (David), I encourage you to list me as a potential advisor on your Ph.D. application and reach out to me to let me know that you're interested.
+      </p>
+      <p class="text-lg leading-relaxed text-slate-600">
+        <b>Masters and Undergraduates</b> &mdash; The ARI Lab welcomes MS and undergrad students who are talented, motivated, and independent workers. I receive many emails from students who are interested in getting involved, and unfortunately, I cannot possibly respond to them all. The best way to get involved in the ARI Lab as an MS or undergrad student is to take one of my classes, where we will often have the chance to work on a project together. I may also post job opportunities for the lab when available.
+      </p>
+    </div>
+  </Container>
+</Layout>

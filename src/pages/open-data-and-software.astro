@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+---
+
+<Layout title="Open Data & Software">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Open Data & Software</Fragment>
+      <Fragment slot="desc"></Fragment>
+    </Sectionhead>
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
+      <p class="text-lg leading-relaxed text-slate-600">
+        The ARI Lab actively maintains several software and data repositories. Those which have been open-sourced and are actively used/maintained are listed below.
+      </p>
+      <h1 class="text-2xl font-bold mt-8 text-black">Software</h1>
+      <div class="mt-6">
+        <p class="text-lg font-semibold text-gray-800"><a href="https://github.com/dporfirio/ISL-Parser" target="_blank" rel="noopener noreferrer">Interaction Specification Language (ISL)</a></p>
+        <p class="text-slate-600">A domain-specific language for specifying robot-human interactions. Best short contribution at HRI 2025.</p>
+      </div>
+    </div>
+  </Container>
+</Layout>
