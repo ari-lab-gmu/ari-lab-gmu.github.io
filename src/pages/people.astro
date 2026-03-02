@@ -113,17 +113,9 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
                         {entry.data.category}
                       </span>
 
-                      {entry.data.link ? (
-                        <a href={entry.data.link} target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
-                          <h2 class="text-xl font-semibold leading-snug tracking-tight mt-1">
-                            {entry.data.title}
-                          </h2>
-                        </a>
-                      ) : (
-                        <h2 class="text-xl font-semibold leading-snug tracking-tight mt-1">
-                          {entry.data.title}
-                        </h2>
-                      )}
+                      <h2 class="text-xl font-semibold leading-snug tracking-tight mt-1">
+                        {entry.data.title}
+                      </h2>
                     </div>
                   </div>
                 </li>

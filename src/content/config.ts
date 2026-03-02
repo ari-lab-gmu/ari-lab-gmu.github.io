@@ -42,6 +42,7 @@ const peopleCollection = defineCollection({
       src: z.string(),
       alt: z.string(),
     }),
+    link: z.string().optional(),
   }),
 });
 
