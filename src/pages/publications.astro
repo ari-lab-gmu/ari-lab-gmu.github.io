@@ -64,10 +64,19 @@ const highlightScript = `
           publishedBlogEntries.map((entry, index) => (
             <li id={entry.slug} class="border-l-4 border-blue-400 pl-6 transition-colors">
               <h3 class="text-xl font-semibold mb-2">
-                {entry.data.title}
+                {entry.data.pdfUrl ? (
+                  <a href={entry.data.pdfUrl} class="hover:text-blue-600 hover:underline">
+                    {entry.data.title}
+                  </a>
+                ) : (
+                  entry.data.title
+                )}
               </h3>
               <p class="text-gray-700 leading-relaxed">
                 {entry.data.citation}
+                {entry.data.acceptanceRate && (
+                  <span class="text-orange-600 ml-2">({entry.data.acceptanceRate} acceptance)</span>
+                )}
               </p>
             </li>
           ))

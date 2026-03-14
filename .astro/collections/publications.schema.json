@@ -16,6 +16,12 @@
         "publishDate": {
           "type": "string"
         },
+        "pdfUrl": {
+          "type": "string"
+        },
+        "acceptanceRate": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

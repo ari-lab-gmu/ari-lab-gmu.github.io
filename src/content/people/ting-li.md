@@ -5,7 +5,7 @@ author: "Ting Li"
 publishDate: "2026-01-22"
 draft: false
 image:
-  src: "/images/pepper-01%20copy.png"
+  src: "/images/ting.jpeg"
   alt: "Ting Li"
 ---
 
