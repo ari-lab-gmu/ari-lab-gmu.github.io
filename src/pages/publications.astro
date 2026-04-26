@@ -4,9 +4,9 @@ import Layout from "@/layouts/Layout.astro";
 import Container from "@/components/container.astro";
 import Sectionhead from "@/components/sectionhead.astro";
 
-// Filter blog entries with 'draft: false' & date before current date
+// Filter publication entries with 'draft: false'
 const publishedBlogEntries = await getCollection("publications", ({ data }) => {
-  return !data.draft && data.publishDate < new Date();
+  return !data.draft;
 });
 
 // Sort content entries by publication date
