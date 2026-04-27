@@ -19,7 +19,7 @@ const getCategoryColor = (category: string) => {
 ---
 
 <main
-  class="flex flex-col md:flex-row items-center justify-center gap-8 pt-16 pb-8 md:pt-12 md:pb-12">
+  class="flex flex-col md:flex-row items-center justify-center gap-8 pt-16 pb-4 md:pt-12 md:pb-4">
   <div>
     <Picture
       src="/images/nao_bye.png"
@@ -44,11 +44,19 @@ const getCategoryColor = (category: string) => {
   </div>
 </main>
 
+<section>
+  <div class="max-w-(--breakpoint-xl) mx-auto">
+    <img src="/images/fuse.png" alt="Fuse at Mason Square" class="w-full rounded-lg object-cover" />
+    <p class="text-base text-slate-600 mt-2">The ARI Laboratory is located in the state-of-the art Fuse at Mason Square building.</p>
+  </div>
+</section>
+
 <section class="py-16">
   <div class="max-w-(--breakpoint-xl) mx-auto">
     <h2 class="text-3xl lg:text-4xl font-bold mb-8">News</h2>
     <div class="space-y-3">
         <p class="text-gray-600"><b>> 4.22</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> Two papers accepted to the 2026 <a href="https://dis.acm.org/2026/">ACM Designing Interactive Systems Conference</a>, one of which is <a href="/publications#distill-2026">Ting's research</a>!</p>
+        <p class="text-gray-600"><b>> 4.21</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> New review article on formal methods in end-user development just dropped! Check it out <a href="/publications#formal-methods-robot-end-user-development-2026">here</a>.</p>
         <p class="text-gray-600"><b>> 3.14</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> David travels to HRI 2026 to present <a href="/publications#capturing-shaping-human-robot-intent-2026">Ting's research</a> at the <a href="https://humanrobotinteraction.org/2026/special-session-by-meta/">Meta Special Session</a>!</p>
         <p class="text-gray-600"><b>> 2.17</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('code')}`}>[code]</span> ARILab releases Version 1.1 of the Interaction Specification Language (best short contribution at HRI '2025). Download <a href="https://github.com/dporfirio/ISL-Parser">here</a>!</p>
         <p class="text-gray-600"><b>> 1.26</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> Congrats to <a href="https://humanfactors.gmu.edu/">HFAC</a> students JP Tiger, Neha Kannan, Jacob Henley, and Paige Williamson on a successful <a href="/publications#nose-knows-2026">HRI Student Design</a> submission!</p>

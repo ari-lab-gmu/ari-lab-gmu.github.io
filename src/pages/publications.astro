@@ -63,7 +63,7 @@ const highlightScript = `
         {
           publishedBlogEntries.map((entry, index) => (
             <li id={entry.slug} class="border-l-4 border-blue-400 pl-6 transition-colors">
-              <h3 class="text-xl font-semibold mb-2">
+              <h3 class="text-base font-semibold mb-0.5">
                 {entry.data.pdfUrl ? (
                   <a href={entry.data.pdfUrl} class="hover:text-blue-600 hover:underline">
                     {entry.data.title}
