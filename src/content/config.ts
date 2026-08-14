@@ -54,6 +54,7 @@ const publicationsCollection = defineCollection({
     publishDate: z.string().transform(str => new Date(str)),
     pdfUrl: z.string().optional(),
     acceptanceRate: z.string().optional(),
+    link: z.string().optional(),
   }),
 });
 

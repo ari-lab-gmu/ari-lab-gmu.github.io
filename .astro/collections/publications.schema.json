@@ -22,6 +22,9 @@
         "acceptanceRate": {
           "type": "string"
         },
+        "link": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

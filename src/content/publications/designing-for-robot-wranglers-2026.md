@@ -4,6 +4,7 @@ citation: "Porfirio, D., McDermott, I., Chen, H., Satake, S., Kanda, T., LaToza,
 publishDate: "2026-06-01"
 acceptanceRate: "21%"
 draft: false
+link: "https://arxiv.org/abs/2605.15892"
 ---
 
 Porfirio, D., McDermott, I., Chen, H., Satake, S., Kanda, T., & **LaToza, T.** (2026, June). Designing for Robot Wranglers: A Synthesis of Literature and Practice. In Proceedings of ACM Designing Interactive Systems. In Press.
