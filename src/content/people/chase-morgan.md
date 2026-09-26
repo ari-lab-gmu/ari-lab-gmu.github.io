@@ -1,12 +1,13 @@
 ---
 title: "Chase Morgan"
-category: "Masters Student"
+category: "Ph.D. Student"
 author: "Chase Morgan"
 publishDate: "2026-01-20"
 draft: false
+link: "https://cmorgm.github.io/"
 image:
-  src: "/images/pepper-01%20copy.png"
+  src: "/images/chase.webp"
   alt: "Chase Morgan"
 ---
 
-Masters student at the ARI Lab.
+Ph.D. student at the ARI Lab.

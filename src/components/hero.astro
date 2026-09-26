@@ -1,7 +1,5 @@
 ---
 import { Picture } from "astro:assets";
-import Link from "@/components/ui/link.astro";
-import { Icon } from "astro-icon/components";
 
 // Map categories to different colors
 const categoryColors: Record<string, string> = {
@@ -16,6 +14,66 @@ const categoryColors: Record<string, string> = {
 
 const getCategoryColor = (category: string) => {
   return categoryColors[category.toLowerCase()] || 'text-blue-400';
+};
+
+// Dates include the year so news can move into the archive automatically.
+const news = [
+  {
+    "date": "2026-08-24",
+    "category": "students",
+    "body": "Welcome new PhD students <a href=\"https://cmorgm.github.io/\" target=\"_blank\" rel=\"noopener noreferrer\">Chase Morgan</a>, <a href=\"https://zhihao-zhang.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Zhihao Zhang</a>, and <a href=\"https://celinemang.github.io/\" target=\"_blank\" rel=\"noopener noreferrer\">Celine Mang</a>!"
+  },
+  {
+    "date": "2026-08-09",
+    "category": "papers",
+    "body": "One paper from <a href=\"https://puqi7.github.io/\" target=\"_blank\" rel=\"noopener noreferrer\">Puqi Zhou</a> accepted to the <a href=\"https://uist.acm.org/2026/\">2026 ACM Symposium on User Interface Software and Technology (UIST)</a>!"
+  },
+  {
+    "date": "2026-05-18",
+    "category": "students",
+    "body": "Congrats to <a href=\"https://puqi7.github.io/\" target=\"_blank\" rel=\"noopener noreferrer\">Puqi Zhou</a> for securing the 2026-2027 Doctoral Research Scholarship at GMU!"
+  },
+  {
+    "date": "2026-04-22",
+    "category": "papers",
+    "body": "Two papers accepted to the 2026 <a href=\"https://dis.acm.org/2026/\">ACM Designing Interactive Systems Conference</a>, one of which is <a href=\"/publications#distill-2026\">Ting's research</a>!"
+  },
+  {
+    "date": "2026-04-21",
+    "category": "papers",
+    "body": "New review article on formal methods in end-user development just dropped! Check it out <a href=\"/publications#formal-methods-robot-end-user-development-2026\">here</a>."
+  },
+  {
+    "date": "2026-03-14",
+    "category": "papers",
+    "body": "David travels to HRI 2026 to present <a href=\"/publications#capturing-shaping-human-robot-intent-2026\">Ting's research</a> at the <a href=\"https://humanrobotinteraction.org/2026/special-session-by-meta/\">Meta Special Session</a>!"
+  },
+  {
+    "date": "2026-02-17",
+    "category": "code",
+    "body": "ARILab releases Version 1.1 of the Interaction Specification Language (best short contribution at HRI '2025). Download <a href=\"https://github.com/dporfirio/ISL-Parser\">here</a>!"
+  },
+  {
+    "date": "2026-01-26",
+    "category": "papers",
+    "body": "Congrats to <a href=\"https://humanfactors.gmu.edu/\">HFAC</a> students JP Tiger, Neha Kannan, Jacob Henley, and Paige Williamson on a successful <a href=\"/publications#nose-knows-2026\">HRI Student Design</a> submission!"
+  },
+  {
+    "date": "2025-08-25",
+    "category": "events",
+    "body": "ARI Lab founded."
+  }
+];
+const cutoff = new Date();
+cutoff.setFullYear(cutoff.getFullYear() - 1);
+const cutoffDate = `${cutoff.getFullYear()}-${String(cutoff.getMonth() + 1).padStart(2, "0")}-${String(cutoff.getDate()).padStart(2, "0")}`;
+const newsGroups = [
+  { older: false, entries: news.filter(entry => entry.date >= cutoffDate) },
+  { older: true, entries: news.filter(entry => entry.date < cutoffDate) },
+];
+const formatDate = (date: string, older: boolean) => {
+  const [year, month, day] = date.split("-");
+  return `${Number(month)}.${Number(day)}${older ? `.${year.slice(-2)}` : ""}`;
 };
 ---
 
@@ -50,14 +108,52 @@ const getCategoryColor = (category: string) => {
 <section class="py-16">
   <div class="max-w-(--breakpoint-xl) mx-auto">
     <h2 class="text-3xl lg:text-4xl font-bold mb-8">News</h2>
-    <div class="space-y-3">
-        <p class="text-gray-600"><b>> 5.18</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('students')}`}>[students]</span> Congrats to <a href="https://puqi7.github.io/" target="_blank" rel="noopener noreferrer">Puqi Zhou</a> for securing the 2026-2027 Doctoral Research Scholarship at GMU!</p>
-        <p class="text-gray-600"><b>> 4.22</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> Two papers accepted to the 2026 <a href="https://dis.acm.org/2026/">ACM Designing Interactive Systems Conference</a>, one of which is <a href="/publications#distill-2026">Ting's research</a>!</p>
-        <p class="text-gray-600"><b>> 4.21</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> New review article on formal methods in end-user development just dropped! Check it out <a href="/publications#formal-methods-robot-end-user-development-2026">here</a>.</p>
-        <p class="text-gray-600"><b>> 3.14</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> David travels to HRI 2026 to present <a href="/publications#capturing-shaping-human-robot-intent-2026">Ting's research</a> at the <a href="https://humanrobotinteraction.org/2026/special-session-by-meta/">Meta Special Session</a>!</p>
-        <p class="text-gray-600"><b>> 2.17</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('code')}`}>[code]</span> ARILab releases Version 1.1 of the Interaction Specification Language (best short contribution at HRI '2025). Download <a href="https://github.com/dporfirio/ISL-Parser">here</a>!</p>
-        <p class="text-gray-600"><b>> 1.26</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('papers')}`}>[papers]</span> Congrats to <a href="https://humanfactors.gmu.edu/">HFAC</a> students JP Tiger, Neha Kannan, Jacob Henley, and Paige Williamson on a successful <a href="/publications#nose-knows-2026">HRI Student Design</a> submission!</p>
-        <p class="text-gray-600"><b>> 8.25</b> <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor('events')}`}>[events]</span> ARI Lab founded.</p>
+    <div id="news-list">
+      {newsGroups.map(group => {
+        const Wrapper = group.older ? "details" : "div";
+        return (
+          <Wrapper id={group.older ? "older-news" : "recent-news"} class={group.older ? "mt-6" : ""} hidden={group.older && group.entries.length === 0}>
+            {group.older && <summary class="cursor-pointer list-item font-semibold text-gray-600">Older News</summary>}
+            <div class={group.older ? "space-y-3 mt-3" : "space-y-3"} data-news-entries>
+              {group.entries.map(entry => (
+                <p class="text-gray-600" data-news-date={entry.date}>
+                  <b>&gt; <time datetime={entry.date}>{formatDate(entry.date, group.older)}</time></b>{" "}
+                  <span class={`ml-2 uppercase tracking-wider text-xs font-medium ${getCategoryColor(entry.category)}`}>[{entry.category}]</span>{" "}
+                  <Fragment set:html={entry.body} />
+                </p>
+              ))}
+            </div>
+          </Wrapper>
+        );
+      })}
     </div>
   </div>
 </section>
+
+
+<script>
+  // Reclassify on each visit so the static site stays current between builds.
+  function updateNewsArchive() {
+    const recent = document.querySelector("#recent-news [data-news-entries]");
+    const archive = document.querySelector("#older-news");
+    const older = archive?.querySelector("[data-news-entries]");
+    if (!recent || !archive || !older) return;
+
+    const cutoff = new Date();
+    cutoff.setFullYear(cutoff.getFullYear() - 1);
+    const cutoffDate = `${cutoff.getFullYear()}-${String(cutoff.getMonth() + 1).padStart(2, "0")}-${String(cutoff.getDate()).padStart(2, "0")}`;
+    const entries = Array.from(document.querySelectorAll<HTMLElement>("[data-news-date]"))
+      .sort((a, b) => b.dataset.newsDate!.localeCompare(a.dataset.newsDate!));
+    for (const entry of entries) {
+      const date = entry.dataset.newsDate!;
+      const isOlder = date < cutoffDate;
+      const [year, month, day] = date.split("-");
+      const label = entry.querySelector("time");
+      if (label) label.textContent = `${Number(month)}.${Number(day)}${isOlder ? `.${year.slice(-2)}` : ""}`;
+      (isOlder ? older : recent).append(entry);
+    }
+    archive.toggleAttribute("hidden", older.children.length === 0);
+  }
+  updateNewsArchive();
+  document.addEventListener("astro:page-load", updateNewsArchive);
+</script>

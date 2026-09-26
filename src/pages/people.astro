@@ -18,6 +18,22 @@ publishedBlogEntries.sort(function (a, b) {
 // Separate director and students
 const director = publishedBlogEntries.filter(entry => entry.data.category === "Director");
 const students = publishedBlogEntries.filter(entry => entry.data.category !== "Director");
+// Display PhD students in seniority order, independent of publication date.
+const phdSeniority = ["Ting Li", "Puqi Zhou", "Chase Morgan", "Celine Mang", "Zhihao Zhang"];
+const phdStudents = students
+  .filter(entry => entry.data.category === "Ph.D. Student")
+  .sort((a, b) => {
+    const rank = (name: string) => {
+      const index = phdSeniority.indexOf(name);
+      return index === -1 ? phdSeniority.length : index;
+    };
+    return rank(a.data.title) - rank(b.data.title);
+  });
+const studentGroups = [
+  { title: "PhD Students", entries: phdStudents },
+  { title: "MS Students", entries: students.filter(entry => entry.data.category === "Masters Student") },
+  { title: "Other Students", entries: students.filter(entry => !["Ph.D. Student", "Masters Student"].includes(entry.data.category)) },
+].filter(group => group.entries.length > 0);
 ---
 
 <Layout title="People">
@@ -75,12 +91,12 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
           )}
 
           {/* Students Section */}
-          {students.length > 0 && (
-            <div>
-              <h3 class="text-2xl font-semibold mb-8">Students</h3>
+          {studentGroups.map(group => (
+            <div class="mb-16">
+              <h3 class="text-2xl font-semibold mb-8">{group.title}</h3>
           <ul class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {
-              students.map((entry, index) => (
+              group.entries.map((entry, index) => (
                 <li>
                   <div class="flex flex-col items-center text-center">
                     {entry.data.link ? (
@@ -114,7 +130,11 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
                       </span>
 
                       <h2 class="text-xl font-semibold leading-snug tracking-tight mt-1">
-                        {entry.data.title}
+                        {entry.data.link ? (
+                          <a href={entry.data.link} target="_blank" rel="noopener noreferrer" class="hover:underline focus-visible:underline">
+                            {entry.data.title}
+                          </a>
+                        ) : entry.data.title}
                       </h2>
                     </div>
                   </div>
@@ -123,7 +143,7 @@ const students = publishedBlogEntries.filter(entry => entry.data.category !== "D
             }
           </ul>
         </div>
-      )}
+      ))}
           <div class="h-[400px]"></div>
         </div>
       </div>
