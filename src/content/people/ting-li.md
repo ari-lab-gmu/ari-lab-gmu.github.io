@@ -4,6 +4,7 @@ category: "Ph.D. Student"
 author: "Ting Li"
 publishDate: "2026-01-22"
 draft: false
+link: "https://tingli98.github.io/"
 image:
   src: "/images/ting.jpeg"
   alt: "Ting Li"
